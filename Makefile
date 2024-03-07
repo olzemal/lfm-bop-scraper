@@ -1,12 +1,14 @@
 GO := $(shell which go)
 
+.DEFAULT_GOAL: bop.json
+
 generate:
 	@$(GO) generate ./...
-
-build:
-	@$(GO) build -o lfmbopscraper cmd/main.go
 
 run:
 	@$(GO) run cmd/main.go
 
-.PHONY: generate build run
+bop.json:
+	@$(GO) run cmd/main.go -o bop.json
+
+.PHONY: generate run
