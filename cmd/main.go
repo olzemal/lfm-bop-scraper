@@ -6,6 +6,7 @@ package main
 //go:generate go run -tags generate github.com/google/addlicense -c "Alexander Olzem" -l apache -y 2024 -s=only ..
 
 import (
+	"context"
 	"encoding/json"
 	"flag"
 	"log"
@@ -16,34 +17,14 @@ import (
 	"github.com/olzemal/lfmbopscraper/pkg/scrape"
 )
 
-const (
-	url = "https://lowfuelmotorsport.com/seasonsv2/bop"
-)
-
-var (
-	wait    = time.Second * 10
-	outfile = ""
-)
-
 func main() {
-	var w string
-	flag.StringVar(&w, "w", "", "wait time in go time format (default 10s)")
+	outfile := ""
 	flag.StringVar(&outfile, "o", "", "output file")
 	flag.Parse()
 
-	if w != "" {
-		d, err := time.ParseDuration(w)
-		if err != nil {
-			log.Fatal(err)
-		}
-		wait = d
-	}
-
-	table, err := scrape.ScrapeBopTable(url, wait)
-	if err != nil {
-		log.Fatal(err)
-	}
-
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
+	defer cancel()
+	table, err := scrape.BopTable(ctx)
 	cfg := parse.TableToConfig(table)
 	j, err := json.MarshalIndent(cfg, "", "  ")
 	if err != nil {
