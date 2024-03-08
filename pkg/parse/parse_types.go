@@ -1,7 +1,4 @@
-// Copyright 2024 Alexander Olzem
-// SPDX-License-Identifier: Apache-2.0
-
-package bop
+package parse
 
 var (
 	// Map of LFM Car Names to ACC IDs
