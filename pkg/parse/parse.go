@@ -12,6 +12,7 @@ import (
 
 const (
 	carNameColumn = 1
+	carYearColumn = 2
 	ballastColumn = 3
 )
 
@@ -37,7 +38,7 @@ func TableToConfig(b []byte) bop.ServerCfg {
 			cur = bop.TrackNameMap[fields[0]]
 			curMap = make(bop.CarMap)
 		} else if len(fields) > 4 {
-			car := bop.CarNameMap[fields[carNameColumn]]
+			car := bop.CarNameMap[fields[carNameColumn]+" "+fields[carYearColumn]]
 			ballast := ballastToInt(fields[ballastColumn])
 			curMap[car] = ballast
 			bopMap[cur] = curMap
