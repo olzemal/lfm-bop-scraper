@@ -18,7 +18,7 @@ var (
 	ignoredPhrases = []string{"Track BoP Version", "Active since", "Class\tCar"}
 )
 
-func TableToConfig(b []byte) ServerCfg {
+func TableToConfig(b []byte) (*ServerCfg, error) {
 	var bopMap = make(TrackMap)
 	var curMap = make(CarMap)
 
@@ -37,8 +37,15 @@ func TableToConfig(b []byte) ServerCfg {
 			curMap = make(CarMap)
 		} else if len(fields) > 4 {
 			car := CarNameMap[fields[carNameColumn]+" "+fields[carYearColumn]]
-			ballast := ballastToInt(fields[ballastColumn])
-			curMap[car] = ballast
+			bal, err := strconv.Atoi(
+				strings.Fields(
+					fields[ballastColumn],
+				)[0],
+			)
+			if err != nil {
+				return nil, err
+			}
+			curMap[car] = bal
 			bopMap[cur] = curMap
 		}
 	}
@@ -54,7 +61,7 @@ func TableToConfig(b []byte) ServerCfg {
 		}
 	}
 
-	return output
+	return &output, nil
 }
 
 func containsIgnoredPhrase(s string) bool {
@@ -64,12 +71,4 @@ func containsIgnoredPhrase(s string) bool {
 		}
 	}
 	return false
-}
-
-func ballastToInt(s string) int {
-	i, err := strconv.Atoi(strings.Fields(s)[0])
-	if err != nil {
-		panic(err)
-	}
-	return i
 }

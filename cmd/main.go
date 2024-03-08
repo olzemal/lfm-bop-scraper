@@ -23,7 +23,13 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute)
 	defer cancel()
 	table, err := scrape.BopTable(ctx)
-	cfg := parse.TableToConfig(table)
+	if err != nil {
+		log.Fatal(err)
+	}
+	cfg, err := parse.TableToConfig(table)
+	if err != nil {
+		log.Fatal(err)
+	}
 	j, err := json.MarshalIndent(cfg, "", "  ")
 	if err != nil {
 		log.Fatal(err)
