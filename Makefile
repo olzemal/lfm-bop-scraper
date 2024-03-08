@@ -8,7 +8,12 @@ generate:
 run:
 	@$(GO) run cmd/main.go
 
+test:
+	@$(eval PROFILE := $(shell mktemp))
+	@$(GO) test -v -coverpkg=./... -coverprofile=$(PROFILE) ./...
+	@$(GO) tool cover -func $(PROFILE)
+
 bop.json:
 	@$(GO) run cmd/main.go -o bop.json
 
-.PHONY: generate run
+.PHONY: generate run test
