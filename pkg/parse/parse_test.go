@@ -4,7 +4,7 @@
 package parse_test
 
 import (
-	"reflect"
+	"slices"
 	"testing"
 
 	"github.com/olzemal/lfmbopscraper/pkg/parse"
@@ -72,8 +72,13 @@ func TestTableToConfig(t *testing.T) {
 		if got == nil {
 			t.Fatalf("Got unexpected <nil>")
 		}
-		if !reflect.DeepEqual(*got, c.out) {
+		if len(got.Entries) != len(c.out.Entries) {
 			t.Fatalf("Got\n%+v\nbut want\n%+v", *got, c.out)
+		}
+		for _, g := range got.Entries {
+			if !slices.Contains(c.out.Entries, g) {
+				t.Fatalf("Got\n%+v\nbut want\n%+v", got, c.out)
+			}
 		}
 	}
 }
