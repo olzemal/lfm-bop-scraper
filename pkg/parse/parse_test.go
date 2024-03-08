@@ -14,7 +14,6 @@ func TestTableToConfig(t *testing.T) {
 	type test struct {
 		in  []byte
 		out parse.ServerCfg
-		err bool
 	}
 
 	tests := []test{
