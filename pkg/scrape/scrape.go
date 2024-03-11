@@ -24,7 +24,7 @@ const (
 )
 
 func BopTable(ctx context.Context) ([]byte, error) {
-	cc, cancel := chromedp.NewContext(context.Background())
+	cc, cancel := chromedp.NewContext(ctx)
 	defer cancel()
 	err := chromedp.Run(cc, chromedp.Navigate(url))
 	if err != nil {
