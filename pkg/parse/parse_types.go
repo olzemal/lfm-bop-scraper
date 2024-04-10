@@ -63,6 +63,7 @@ var (
 		"Autodromo Nazionale di Monza":  "monza",
 		"Mount Panorama Circuit":        "mount_panorama",
 		"Nürburgring":                   "nurburgring",
+		"Nürburgring Nordschleife 24h":  "nurburgring_24h",
 		"Oulton Park":                   "oulton_park",
 		"Circuit de Paul Ricard":        "paul_ricard",
 		"Silverstone":                   "silverstone",
