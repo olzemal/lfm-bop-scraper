@@ -44,6 +44,7 @@ var (
 		"Lamborghini Huracan GT3 EVO 2 2023": 33,
 		"Porsche 992 GT3 R 2023":             34,
 		"McLaren 720S GT3 Evo 2023":          35,
+		"Ford Mustang GT3":                   36,
 		// 50+ are GT4
 	}
 	// Map of LFM to ACC server track names
