@@ -34,11 +34,11 @@ var (
 		"Porsche 991II GT3 R 2019": 23,
 		"Ferrari 488 GT3 Evo 2020": 24,
 		"Mercedes-AMG GT3 2020":    25,
-		"BMW M4 GT3 2021":          26,
+		// 26 not GT3
 		// 27 not GT3
 		// 28 not GT3
 		// 29 not GT3
-		// 30 not GT3
+		"BMW M4 GT3 2021":                    30,
 		"Audi R8 LMS GT3 evo II 2022":        31,
 		"Ferrari 296 GT3 2023":               32,
 		"Lamborghini Huracan GT3 EVO 2 2023": 33,
